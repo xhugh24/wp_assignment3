@@ -1,0 +1,255 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <!-- Boxicons CDN for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+      /* Reset default margins and padding */
+      * {margin: 0;padding: 0;box-sizing: border-box;}
+
+      body {
+          font-family: 'Poppins', sans-serif;
+          background: #7462ce;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          padding: min(5vh, 40px);
+          overflow-x: hidden;
+      }
+
+      /* Variables */
+      :root {--primary-color: #626cd6;--primary-color-hover: #555bb3;}
+
+      .logo-content {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: white;
+          font-size: 30px;
+          font-weight: 700;
+          margin-bottom: 30px;
+      }
+
+      .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+      .logo-text {font-size: 30px;}
+
+      .register-container {
+          background: #ffffff;
+          padding: 40px 30px;
+          border-radius: 15px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+          max-width: 500px;
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .register-container h1 {text-align: center;color: #333;margin-bottom: 30px;font-size: 28px;font-weight: 600;}
+
+      .register-container form {width: 100%;}
+
+      .form-group {margin-bottom: 20px;display: flex;flex-direction: column;align-items: stretch;}
+
+      .register-container label {font-size: 14px;margin-bottom: 8px;color: #555;}
+
+      .register-container input, .register-container select {
+          padding: 12px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          width: 100%;
+          outline: none;
+      }
+
+      .register-container input:focus, .register-container select:focus {border-color: rgba(0, 0, 0, 0.5);box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);}
+
+      .button-group {display: flex;gap: 10px;}
+
+      .register-container button {
+          width: 100%;
+          padding: 12px;
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 18px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .register-container button:hover {background-color: var(--primary-color-hover);}
+
+      .register-container .cancel-btn {background-color: #ccc;color: #333;}
+
+      .register-container .cancel-btn:hover {background-color: #b3b3b3;}
+
+      .login-text {margin-top: 15px;font-size: 14px;text-align: center;}
+
+      .login-text a {color: var(--primary-color);font-weight: 600;text-decoration: none;}
+
+      .login-text a:hover {text-decoration: underline;}
+
+      @media (max-width: 768px) {
+          .logo-content {font-size: 24px;}
+          .logo-icon {font-size: 2rem;}
+          .logo-text {font-size: 24px;}
+          .register-container {padding: 20px 15px;}
+          .register-container h1 {font-size: 24px;}
+          .register-container label {font-size: 12px;}
+          .register-container input, .register-container select {padding: 10px;font-size: 14px;}
+          .register-container button {padding: 10px;font-size: 16px;}
+          .button-group {flex-direction: column;gap: 5px;}
+          .login-text {font-size: 12px;}
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo Above Register Container -->
+    <a href="#" class="logo-content flex">
+      <i class='bx bx-wrench logo-icon'></i>
+      <span class="logo-text">XYZ Repairs</span>
+    </a>
+
+    <!-- Register Form Container -->
+    <div class="register-container">
+      <h1>Create Account</h1>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <label for="trn">Tax Registration Number (TRN)</label>
+          <input type="text" id="trn" name="trn" placeholder="000-000-000" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="button-group">
+          <button type="submit">Register</button>
+          <button type="button" class="cancel-btn" onclick="document.getElementById('register-form').reset()">Cancel</button>
+        </div>
+      </form>
+      <div class="login-text">
+        Already have an account? <a href="index.html">Login</a>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('register-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Get form values
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const dob = new Date(document.getElementById('dob').value);
+        const gender = document.getElementById('gender').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const trn = document.getElementById('trn').value;
+        const password = document.getElementById('password').value;
+        const registrationDate = new Date();
+
+        // Validate age (must be over 18)
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+          age--;
+        }
+        if (age < 18) {
+          alert('You must be over 18 to register.');
+          return;
+        }
+
+        // Validate password length
+        if (password.length < 8) {
+          alert('Password must be at least 8 characters long.');
+          return;
+        }
+
+        // Validate TRN format (000-000-000)
+        const trnRegex = /^\d{3}-\d{3}-\d{3}$/;
+        if (!trnRegex.test(trn)) {
+          alert('TRN must be in the format 000-000-000.');
+          return;
+        }
+
+        // Check if TRN is unique
+        let registrationData = JSON.parse(localStorage.getItem('RegistrationData') || '[]');
+        if (registrationData.some(user => user.trn === trn)) {
+          alert('This TRN is already registered.');
+          return;
+        }
+
+        // Create user object
+        const user = {
+          firstName,
+          lastName,
+          dob: dob.toISOString(),
+          gender,
+          phone,
+          email,
+          trn,
+          password,
+          registrationDate: registrationDate.toISOString(),
+          cart: {},
+          invoices: [],
+          isAdmin: false // Default to non-admin
+        };
+
+        // Store in localStorage
+        registrationData.push(user);
+        localStorage.setItem('RegistrationData', JSON.stringify(registrationData));
+        localStorage.setItem('currentUser', JSON.stringify(user)); // Overwrite currentUser
+
+        alert('Registration successful! You can now login.');
+        window.location.href = 'index.html'; // Redirect to product page instead of index
+      });
+    </script>
+  </body>
+</html>

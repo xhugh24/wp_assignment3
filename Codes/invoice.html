@@ -1,0 +1,231 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - XYZ Repairs</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        * {margin: 0;padding: 0;box-sizing: border-box;}
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        :root {--primary-color: #626cd6;--primary-color-hover: #555bb3;--z-fixed: 100;}
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 7rem;
+            background: #000;
+            z-index: var(--z-fixed);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo-content {display: flex;align-items: center;text-decoration: none;color: white;font-size: 30px;font-weight: 700;}
+
+        .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+        .logo-text {font-size: 30px;}
+
+        .menu-list {display: flex;list-style: none;gap: 25px;}
+
+        .nav-link {color: white;text-decoration: none;font-size: 18px;font-weight: 600;transition: color 0.3s;}
+
+        .nav-link:hover, .nav-link.active-navlink {color: var(--primary-color);}
+
+        .cart-btn {background: var(--primary-color);color: white;font-size: 16px;font-weight: 600;padding: 10px 20px;border: none;border-radius: 20px;text-decoration: none;}
+
+        .cart-btn:hover {background: var(--primary-color-hover);}
+
+        .invoice-container {
+            width: 800px;
+            max-width: 90%;
+            margin-top: 8rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            height: calc(100vh - 9rem);
+            overflow-y: auto;
+        }
+
+        .invoice-container h2 {font-size: 28px;color: #333;margin-bottom: 20px;}
+
+        .invoice-header {margin-bottom: 20px;}
+
+        .invoice-header p {font-size: 14px;color: #666;margin-bottom: 5px;}
+
+        .invoice-details {margin-bottom: 20px;}
+
+        .invoice-details p {font-size: 14px;color: #333;margin-bottom: 10px;}
+
+        .summary-details {margin-bottom: 20px;}
+
+        .summary-item {display: flex;justify-content: space-between;margin-bottom: 10px;font-size: 14px;color: #333;}
+
+        .discount-info {border-top: 1px solid #ccc;padding-top: 10px;margin: 15px 0;}
+
+        .discount-info p {font-size: 14px;color: #666;}
+
+        .tax-info {margin: 15px 0;}
+
+        .tax-info p {font-size: 14px;color: #666;}
+
+        .total-info {border-top: 1px solid #ccc;padding-top: 10px;}
+
+        .total-info p {font-size: 16px;font-weight: 600;color: #333;display: flex;justify-content: space-between;}
+
+        .message {margin-top: 20px;padding: 10px;background: #e0f7e0;color: #333;border-radius: 8px;text-align: center;}
+
+        .back-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {background: var(--primary-color-hover);}
+
+        @media (max-width: 768px) {
+            .invoice-container {width: 90%;padding: 20px;margin-top: 7rem;height: calc(100vh - 8rem);}
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo-content">
+                <i class='bx bx-wrench logo-icon'></i>
+                <span class="logo-text">XYZ Repairs</span>
+            </a>
+            <ul class="menu-list">
+                <li><a href="products.html" class="nav-link">Home</a></li>
+                <li><a href="index.html" class="nav-link">Login</a></li>
+                <li><a href="register.html" class="nav-link">Register</a></li>
+                <li><a href="checkout.html" class="nav-link">Checkout</a></li>
+                <li><a href="invoice.html" class="nav-link">Invoice</a></li>
+                <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+            </ul>
+            <a href="cart.html" class="cart-btn" id="cart-btn">Cart (0)</a>
+        </nav>
+    </header>
+
+    <div class="invoice-container">
+        <h2>Invoice</h2>
+        <div class="invoice-header" id="invoice-header"></div>
+        <div class="invoice-details" id="invoice-details"></div>
+        <div class="summary-details" id="summary-details"></div>
+        <div class="discount-info" id="discount-info"></div>
+        <div class="tax-info" id="tax-info"></div>
+        <div class="total-info" id="total-info"></div>
+        <div class="message" id="message"></div>
+        <button class="back-btn" onclick="window.location.href='products.html'">Back to Home</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // update the cart button to show the number of items in the cart
+        function updateCartButton() {
+            const cart = getCart(); // get the current cart data
+            const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0); // count the total items
+            document.getElementById('cart-btn').textContent = `Cart (${itemCount})`; // update the button text
+        }
+
+        // display the invoice details
+        function displayInvoice() {
+            const invoice = JSON.parse(localStorage.getItem('latestInvoice') || '{}'); // retrieve the latest invoice
+            // if invoice is empty or items are missing, display a message and exit
+            if (!invoice.items || invoice.items.length === 0) {
+                document.getElementById('invoice-header').innerHTML = '<p>No invoice data available.</p>'; // show "no invoice" message
+                return;
+            }
+
+            const date = new Date(invoice.date).toLocaleDateString(); // format the invoice date
+
+            // set the invoice header details
+            document.getElementById('invoice-header').innerHTML = `
+                <p><strong>XYZ Repairs</strong></p>
+                <p>Date: ${date}</p>
+                <p>Invoice #: ${invoice.invoiceNumber}</p>
+                <p>TRN: ${invoice.trn}</p>
+            `;
+
+            // set the shipping information details
+            document.getElementById('invoice-details').innerHTML = `
+                <p><strong>Shipping Information:</strong></p>
+                <p>Name: ${invoice.username}</p>
+                <p>Address: ${invoice.shippingAddress.replace(/\n/g, '<br>')}</p>
+            `;
+
+            // display the summary of items in the invoice
+            document.getElementById('summary-details').innerHTML = invoice.items.map(item => `
+                <div class="summary-item">
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+            `).join('');
+
+            // show the discount information
+            document.getElementById('discount-info').innerHTML = `
+                <p>Discount (10%): -$${invoice.discount}</p>
+            `;
+
+            // show the tax information
+            document.getElementById('tax-info').innerHTML = `
+                <p>Tax: $${invoice.tax}</p>
+            `;
+
+            // show the subtotal and total amounts
+            document.getElementById('total-info').innerHTML = `
+                <p><span>Subtotal:</span> $${invoice.subtotal}</p>
+                <p><span>Total:</span> $${invoice.total}</p>
+            `;
+
+            document.getElementById('message').textContent = 'Invoice has been sent to your email.'; // display confirmation message
+            localStorage.removeItem('latestInvoice'); // remove the stored invoice
+        }
+
+        // set up event listener for page load
+        window.addEventListener('load', () => {
+            displayInvoice(); // show the invoice details
+            updateCartButton(); // update the cart button
+        });
+    </script>
+</body>
+</html>

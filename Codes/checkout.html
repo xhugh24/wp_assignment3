@@ -1,0 +1,289 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Checkout - XYZ Repairs</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+            * {margin: 0;padding: 0;box-sizing: border-box;}
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: #f5f5f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            :root {--primary-color: #626cd6;--primary-color-hover: #555bb3;--z-fixed: 100;}
+
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 7rem;
+                background: #000;
+                z-index: var(--z-fixed);
+            }
+
+            .nav {
+                max-width: 1200px;
+                margin: 0 auto;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 40px;
+            }
+
+            .logo-content {display: flex;align-items: center;text-decoration: none;color: white;font-size: 30px;font-weight: 700;}
+
+            .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+            .logo-text {font-size: 30px;}
+
+            .menu-list {display: flex;list-style: none;gap: 25px;}
+
+            .nav-link {color: white;text-decoration: none;font-size: 18px;font-weight: 600;transition: color 0.3s;}
+
+            .nav-link:hover, .nav-link.active-navlink {color: var(--primary-color);}
+
+            .cart-btn {background: var(--primary-color);color: white;font-size: 16px;font-weight: 600;padding: 10px 20px;border: none;border-radius: 20px;text-decoration: none;}
+
+            .cart-btn:hover {background: var(--primary-color-hover);}
+
+            .checkout-container {
+                width: 800px;
+                max-width: 90%;
+                margin-top: 8rem;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                padding: 30px;
+                height: calc(100vh - 9rem);
+                overflow-y: auto;
+            }
+
+            .checkout-container h2 {font-size: 28px;color: #333;margin-bottom: 20px;}
+
+            .summary-details {margin-bottom: 20px;}
+
+            .summary-item {display: flex;justify-content: space-between;margin-bottom: 10px;font-size: 14px;color: #333;}
+
+            .discount-info {border-top: 1px solid #ccc;padding-top: 10px;margin: 15px 0;}
+
+            .discount-info p {font-size: 14px;color: #666;}
+
+            .form-group {margin-bottom: 20px;}
+
+            .form-group label {font-size: 14px;color: #555;display: block;margin-bottom: 8px;}
+
+            .form-group input, .form-group textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 16px;
+                outline: none;
+            }
+
+            .form-group input:focus, .form-group textarea:focus {border-color: var(--primary-color);}
+
+            .button-group {display: flex;gap: 15px;margin-top: 25px;}
+
+            .checkout-container button {
+                flex: 1;
+                padding: 12px;
+                font-size: 18px;
+                font-weight: 600;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .confirm-btn {background: #000;color: white;}
+
+            .confirm-btn:hover {background: #333;}
+
+            .cancel-btn {background: #ccc;color: #333;}
+
+            .cancel-btn:hover {background: #b3b3b3;}
+
+            @media (max-width: 768px) {
+                .checkout-container {width: 90%;padding: 20px;margin-top: 7rem;height: calc(100vh - 8rem);}
+                .button-group {flex-direction: column;gap: 10px;}
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="nav">
+                <a href="#" class="logo-content">
+                    <i class='bx bx-wrench logo-icon'></i>
+                    <span class="logo-text">XYZ Repairs</span>
+                </a>
+                <ul class="menu-list">
+                    <li><a href="products.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html" class="nav-link">Login</a></li>
+                    <li><a href="register.html" class="nav-link">Register</a></li>
+                    <li><a href="checkout.html" class="nav-link">Checkout</a></li>
+                    <li><a href="invoice.html" class="nav-link">Invoice</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                </ul>
+                <a href="cart.html" class="cart-btn" id="cart-btn">Cart (0)</a>
+            </nav>
+        </header>
+
+        <div class="checkout-container">
+            <h2>Checkout</h2>
+            <div class="summary-details" id="summary-details"></div>
+            <div class="discount-info" id="discount-info">
+                <p>Discount (10%): -<span id="discount-amount">0.00</span></p>
+            </div>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="shipping-name">Full Name</label>
+                    <input type="text" id="shipping-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="shipping-address">Shipping Address</label>
+                    <textarea id="shipping-address" required rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="amount-paid">Amount Being Paid</label>
+                    <input type="number" id="amount-paid" step="0.01" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="confirm-btn">Confirm</button>
+                    <button type="button" class="cancel-btn" onclick="window.location.href='cart.html'">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+    // update the cart button to show the number of items in the cart
+    function updateCartButton() {
+        const cart = getCart(); // get the current cart data
+        const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0); // count total items
+        document.getElementById('cart-btn').textContent = `Cart (${itemCount})`; // update the button text
+    }
+
+    // display the checkout summary for the user
+    function displayCheckoutSummary() {
+        const cart = getCart(); // get the current cart data
+        const summaryDetails = document.getElementById('summary-details'); // element to show summary
+        const discountAmount = document.getElementById('discount-amount'); // element to show discount
+
+        // if the cart is empty, display a message and hide the checkout form
+        if (cart.length === 0) {
+            summaryDetails.innerHTML = '<p>No items in cart</p>'; // show "no items" message
+            discountAmount.textContent = '0.00'; // set discount to 0
+            document.getElementById('checkout-form').style.display = 'none'; // hide checkout form
+            return;
+        }
+
+        // display the items in the cart as a summary
+        summaryDetails.innerHTML = cart.map(item => `
+            <div class="summary-item">
+                <span>${item.name} (x${item.quantity})</span>
+                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+        `).join('');
+
+        const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0); // calculate subtotal
+        const discountRate = 0.10; // set the discount rate
+        const discount = subtotal * discountRate; // calculate discount amount
+        const total = subtotal - discount; // calculate total after discount
+
+        discountAmount.textContent = discount.toFixed(2); // display the discount amount
+
+        // add subtotal and total details to the summary
+        summaryDetails.innerHTML += `
+            <div class="summary-item" style="font-weight: 600; margin-top: 10px;">
+                <span>Subtotal</span>
+                <span>$${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="summary-item" style="font-weight: 600;">
+                <span>Total</span>
+                <span>$${total.toFixed(2)}</span>
+            </div>
+        `;
+
+        document.getElementById('amount-paid').value = total.toFixed(2); // set total as amount paid
+    }
+
+        // handle the checkout form submission
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // prevent form's default behavior
+            const cart = getCart(); // get the current cart data
+            if (cart.length === 0) {
+                alert('Your cart is empty!'); // show alert for empty cart
+                return;
+            }
+
+            // get user inputs
+            const shippingName = document.getElementById('shipping-name').value.trim();
+            const shippingAddress = document.getElementById('shipping-address').value.trim();
+            const amountPaid = parseFloat(document.getElementById('amount-paid').value);
+            const currentUser = getCurrentUser(); // get current user info
+
+            // check if the user has a valid TRN; if not, initialize a guest session
+            if (!currentUser.trn) {
+                initializeGuestSession();
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0); // calculate subtotal
+            const discount = subtotal * 0.10; // calculate discount
+            const total = subtotal - discount; // calculate total
+
+            // check if the paid amount is less than the total amount
+            if (amountPaid < total) {
+                alert('Amount paid must be at least the total amount due!'); // show alert for insufficient payment
+                return;
+            }
+
+            // generate and save the invoice
+            const invoice = {
+                invoiceNumber: generateInvoiceNumber(), // create invoice number
+                trn: getCurrentUser().trn, // user's TRN
+                date: new Date().toISOString(), // current date and time
+                shippingName: shippingName, // user's shipping name
+                shippingAddress: shippingAddress, // user's shipping address
+                username: currentUser.firstName ? `${currentUser.firstName} ${currentUser.lastName}` : shippingName, // full name or shipping name
+                items: cart.map(item => ({ ...item })), // list of cart items
+                subtotal: subtotal.toFixed(2), // subtotal amount
+                discount: discount.toFixed(2), // discount amount
+                tax: '7.00', // fixed tax amount
+                total: total.toFixed(2) // total amount
+            };
+
+            saveInvoice(invoice); // save the invoice
+            clearCart(); // clear the cart
+            localStorage.setItem('latestInvoice', JSON.stringify(invoice)); // save invoice in local storage
+            window.location.href = 'invoice.html'; // redirect to invoice page
+        });
+
+        // initialize the checkout summary and cart button on page load
+        window.addEventListener('load', () => {
+            displayCheckoutSummary(); // display the checkout summary
+            updateCartButton(); // update the cart button
+        });
+        </script>
+    </body>
+</html>

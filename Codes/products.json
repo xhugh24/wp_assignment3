@@ -1,0 +1,86 @@
+[
+  {
+    "id": "1",
+    "name": "Laptop RAM",
+    "price": 50.00,
+    "image": "../Assets/laptop-ram.png",
+    "description": "High-speed DDR4 RAM for laptops"
+  },
+  {
+    "id": "2",
+    "name": "Laptop Keyboard",
+    "price": 20.00,
+    "image": "../Assets/laptop-keyboard.png",
+    "description": "Replacement keyboard for laptops"
+  },
+  {
+    "id": "3",
+    "name": "Smartphone Screen",
+    "price": 100.00,
+    "image": "../Assets/smartphone-screen.png",
+    "description": "OLED display for smartphones"
+  },
+  {
+    "id": "4",
+    "name": "Laptop Charger",
+    "price": 15.00,
+    "image": "../Assets/laptop-charger.png",
+    "description": "Universal laptop power adapter"
+  },
+  {
+    "id": "5",
+    "name": "Smartphone Case",
+    "price": 10.00,
+    "image": "../Assets/smartphone-case.png",
+    "description": "Durable protective case for smartphones"
+  },
+  {
+    "id": "6",
+    "name": "Laptop Battery",
+    "price": 60.00,
+    "image": "../Assets/laptop-battery.png",
+    "description": "Lithium-ion battery for laptops"
+  },
+  {
+    "id": "7",
+    "name": "laptop Microphone",
+    "price": 25.00,
+    "image": "../Assets/laptop-microphone.png",
+    "description": "Built-in microphone for laptops"
+  },
+  {
+    "id": "8",
+    "name": "Laptop Touchpad",
+    "price": 12.00,
+    "image": "../Assets/laptop-touchpad.png",
+    "description": "Responsive touchpad for laptops"
+  },
+  {
+    "id": "9",
+    "name": "Smartphone Battery",
+    "price": 30.00,
+    "image": "../Assets/smartphone-battery.png",
+    "description": "High-capacity battery for smartphones"
+  },
+  {
+    "id": "10",
+    "name": "Laptop SSD",
+    "price": 70.00,
+    "image": "../Assets/laptop-ssd.png",
+    "description": "Fast SSD storage for laptops"
+  },
+  {
+    "id": "11",
+    "name": "Smartphone Charger",
+    "price": 15.00,
+    "image": "../Assets/smartphone-charger.png",
+    "description": "Fast-charging USB-C charger for smartphones"
+  },
+  {
+    "id": "12",
+    "name": "Laptop Fan",
+    "price": 35.00,
+    "image": "../Assets/laptop-fan.png",
+    "description": "Cooling fan for laptops"
+  }
+]

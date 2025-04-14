@@ -1,0 +1,440 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>XYZ Repair</title>
+        <!-- Boxicons CDN for small icons -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+            /* Reset default margins and padding */
+            * {margin: 0;padding: 0;box-sizing: border-box;}
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: #f5f5f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            main {flex: 1 0 auto;}
+
+            /* css variables */
+            :root {
+                --primary-color: #626cd6;
+                --primary-color-hover: #555bb3;
+                --text-color: #333;
+                --white-color: #FFF;
+                --z-fixed: 100;
+                --tran-0-3: 0.3s;
+                --tran-0-5: 0.5s;
+            }
+
+            /* Header */
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 7rem;
+                width: 100%;
+                z-index: var(--z-fixed);
+                transition: var(--tran-0-5);
+                background: transparent;
+            }
+
+            .header.scrolled {background-color: #000;}
+
+            .nav.container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 40px;
+                height: 100%;
+            }
+
+            .logo-content {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+                font-size: 30px;
+                font-weight: 700;
+            }
+
+            .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+            .logo-text {font-size: 30px;}
+
+            .menu-content {display: flex;align-items: center;gap: 40px;}
+
+            .menu-list {display: flex;list-style: none;gap: 25px;}
+
+            .nav-link {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: 600;
+                transition: color var(--tran-0-3);
+            }
+
+            .nav-link:hover, .nav-link.active-navlink {color: var(--primary-color);}
+
+            .cart-btn {
+                background-color: var(--primary-color);
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: background-color var(--tran-0-3);
+                text-decoration: none;
+            }
+
+            .cart-btn:hover {background-color: var(--primary-color-hover);}
+
+            /* Hero */
+            .hero {
+                height: 100vh;
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Assets/login-stock.jpg') no-repeat center center/cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .hero-content {max-width: 900px;width: 100%;color: white;}
+
+            .hero h1 {
+                font-size: 48px;
+                font-weight: 700;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                margin-bottom: 20px;
+            }
+
+            .hero h3 {font-size: 18px;font-weight: 400;margin-bottom: 30px;}
+
+            .button-container {display: flex;justify-content: center;gap: 20px;}
+
+            .hero a, .hero button {
+                padding: 12px 24px;
+                font-size: 16px;
+                font-weight: 600;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: background-color 0.3s ease, color 0.3s ease;
+                text-decoration: none;
+            }
+
+            .shop-now {background-color: white;color: var(--primary-color);}
+
+            .repair-now {background-color: var(--primary-color);color: white;}
+
+            .shop-now:hover {background-color: var(--primary-color);color: white;}
+
+            .repair-now:hover {background-color: var(--primary-color-hover);}
+
+            /* Content Sections */
+            .content-section {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 60px 20px;
+                text-align: center;
+            }
+
+            .content-section h2 {
+                font-size: 36px;
+                font-weight: 700;
+                margin-bottom: 20px;
+                color: var(--text-color);
+            }
+
+            .content-section p {font-size: 18px;font-weight: 400;color: #666;line-height: 1.6;}
+
+            /* Product Cards */
+            #products .product-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+                margin-top: 40px;
+            }
+
+            .product-card {
+                background-color: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 25px;
+                text-align: center;
+                transition: transform 0.3s ease;
+            }
+
+            .product-card:hover {transform: translateY(-5px);}
+
+            .product-card img {
+                max-width: 100%;
+                height: 200px;
+                object-fit: contain;
+                margin-bottom: 20px;
+            }
+
+            .product-card h3 {
+                font-size: 20px;
+                font-weight: 600;
+                color: var(--text-color);
+                margin-bottom: 12px;
+            }
+
+            .product-card p {
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--primary-color);
+                margin-bottom: 15px;
+            }
+
+            .product-card .add-to-cart {
+                background-color: var(--primary-color);
+                color: white;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .product-card .add-to-cart:hover {background-color: var(--primary-color-hover);}
+
+            .add-to-cart.pulse {animation: pulse 0.5s ease;}
+
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+
+            /* Footer */
+            footer {background-color: #1a1a1a;color: #fff;padding: 60px 0 20px;flex-shrink: 0;}
+
+            .footer-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+                padding: 0 20px;
+            }
+
+            .footer-section h3 {font-size: 20px;font-weight: 600;margin-bottom: 20px;color: var(--primary-color);}
+
+            .footer-section p {font-size: 14px;line-height: 1.6;color: #ccc;}
+
+            .footer-section ul {list-style: none;}
+
+            .footer-section ul li {margin-bottom: 10px;}
+
+            .footer-section ul li a {color: #ccc;text-decoration: none;font-size: 14px;transition: color 0.3s ease;}
+
+            .footer-section ul li a:hover {color: var(--primary-color);}
+
+            .footer-socials {display: flex;gap: 15px;}
+
+            .footer-socials a {color: #fff;font-size: 24px;transition: color 0.3s ease;}
+
+            .footer-socials a:hover {color: var(--primary-color);}
+
+            .newsletter-form {display: flex;gap: 10px;margin-top: 15px;}
+
+            .newsletter-form input {
+                padding: 10px;
+                font-size: 14px;
+                border: none;
+                border-radius: 20px;
+                width: 100%;
+                max-width: 200px;
+                outline: none;
+            }
+
+            .newsletter-form button {
+                padding: 10px 20px;
+                font-size: 14px;
+                font-weight: 600;
+                background-color: var(--primary-color);
+                color: #fff;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .footer-bottom {
+                text-align: center;
+                padding-top: 40px;
+                border-top: 1px solid #333;
+                margin-top: 40px;
+                font-size: 12px;
+                color: #888;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header section -->
+        <header class="header">
+            <nav class="nav container flex">
+                <a href="#" class="logo-content flex">
+                    <i class='bx bx-wrench logo-icon'></i>
+                    <span class="logo-text">XYZ Repairs</span>
+                </a>
+                <div class="menu-content">
+                    <ul class="menu-list flex">
+                        <li><a href="products.html" class="nav-link">Home</a></li>
+                        <li><a href="index.html" class="nav-link">Login</a></li>
+                        <li><a href="register.html" class="nav-link">Register</a></li>
+                        <li><a href="checkout.html" class="nav-link">Checkout</a></li>
+                        <li><a href="invoice.html" class="nav-link">Invoice</a></li>
+                        <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    </ul>
+                </div>
+                <a href="cart.html" class="cart-btn" id="cart-btn">Cart (0)</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- hero section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>We Provide Fast Computer and Phone Repair Service</h1>
+                    <h3>Get your devices fixed in no time by our expert technicians. From cracked screens to slow performance, we handle it all with top-quality parts and unbeatable speed.</h3>
+                    <div class="button-container">
+                        <a href="#products" class="shop-now">Shop Now</a>
+                        <button class="repair-now">Repair Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section" id="products">
+                <h2>Our Products</h2>
+                <div class="product-grid" id="product-grid"></div>
+            </section>
+
+            <section class="content-section" id="about">
+                <h2>About Us</h2>
+                <p>At XYZ Repairs, we’re dedicated to keeping your devices running smoothly. Since our founding in 2020, we’ve built a reputation for delivering <span class="highlight">fast, reliable, and affordable</span> repair services for computers, phones, and more. Our mission is simple: to provide top-tier solutions that get you back to your daily routine with minimal downtime.</p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About XYZ Repairs</h3>
+                    <p>We are your trusted experts in computer and phone repairs, offering fast, reliable service with top-quality parts since 2020.</p>
+                    <div class="footer-socials">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-twitter'></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@xyzrepairs.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Address: Kingston, Jamaica</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get the latest updates and offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 XYZ Repairs. All rights reserved.</p>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+
+        <script>
+            // header scroll behavior
+            // console.log is used to debug for errors, this will stay enabled
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('.header');
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            // update cart button
+            function updateCartButton() {
+                const cart = getCart(); // From script.js
+                const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.getElementById('cart-btn').textContent = `Cart (${itemCount})`;
+            }
+            
+            // fetch and display products
+            fetch("products.json")
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                //load products from JSON file and display them in the product grid
+                .then(products => {
+                    const productGrid = document.getElementById('product-grid');
+                    products.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.classList.add('product-card');
+                        productCard.innerHTML = `
+                            <img src="${product.image}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>$${product.price.toFixed(2)}</p>
+                            <button class="add-to-cart" onclick='handleAddToCart(${JSON.stringify(product)})'>Add to Cart</button>
+                        `;
+                        productGrid.appendChild(productCard);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading products:', error);
+                    document.getElementById('product-grid').innerHTML = '<p>Failed to load products. Please try again later.</p>';
+                });
+
+            // Add to cart with pulse animation
+            function handleAddToCart(product) {
+                addToCart(product); // From script.js
+                const button = event.target;
+                button.classList.add('pulse');
+                setTimeout(() => button.classList.remove('pulse'), 500);
+                // updateCartButton called via event listener
+            }
+
+            // init setup and listen for cart updates
+            window.addEventListener('load', updateCartButton);
+            window.addEventListener('cartUpdated', updateCartButton);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,349 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shopping Cart - XYZ Repairs</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+            * {margin: 0;padding: 0;box-sizing: border-box;}
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: #f5f5f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            :root {--primary-color: #626cd6;--primary-color-hover: #555bb3;--z-fixed: 100;}
+
+            /* Header */
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 7rem;
+                background: #000;
+                z-index: var(--z-fixed);
+            }
+
+            .nav {
+                max-width: 1200px;
+                margin: 0 auto;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 40px;
+            }
+
+            .logo-content {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+                font-size: 30px;
+                font-weight: 700;
+            }
+
+            .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+            .logo-text {font-size: 30px;}
+
+            .menu-list {display: flex;list-style: none;gap: 25px;}
+
+            .nav-link {color: white;text-decoration: none;font-size: 18px;font-weight: 600;transition: color 0.3s;}
+
+            .nav-link:hover, .nav-link.active-navlink {color: var(--primary-color);}
+
+            .cart-btn {
+                background: var(--primary-color);
+                color: white;
+                font-size: 16px;
+                font-weight: 600;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                text-decoration: none;
+            }
+
+            .cart-btn:hover {background: var(--primary-color-hover);}
+
+            /* Cart Card */
+            .cart-card {
+                width: 50%;
+                max-width: 90%;
+                margin-top: 8rem;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                height: calc(100vh - 9rem);
+                display: flex;
+                overflow: hidden;
+            }
+
+            .cart-left {
+                flex: 2;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cart-items-header {margin-bottom: 20px;}
+
+            .cart-items-header h2 {font-size: 28px;color: #333;}
+
+            .cart-items-list {flex-grow: 1;overflow-y: auto;}
+
+            .cart-item {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                padding: 15px 0;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .cart-item img {width: 70px;height: 70px;object-fit: cover;}
+
+            .item-details {flex: 1;}
+
+            .item-details p {font-size: 16px;color: #333;}
+
+            .item-details .description {font-size: 14px;color: #666;}
+
+            .quantity-controls {display: flex;align-items: center;gap: 10px;}
+
+            .quantity-btn {
+                width: 30px;
+                height: 30px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            .quantity-btn:hover {background: var(--primary-color-hover);}
+
+            .item-price {font-size: 16px;color: #333;width: 100px;text-align: right;}
+
+            .remove-btn {
+                background: #ff4444;
+                color: white;
+                border: none;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            .remove-btn:hover {background: #cc0000;}
+
+            .cart-footer {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .continue-shopping a {color: var(--primary-color);font-size: 14px;text-decoration: none;}
+
+            .continue-shopping a:hover {text-decoration: underline;}
+
+            .clear-cart-btn {
+                background: #ff4444;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .clear-cart-btn:hover {background: #cc0000;}
+
+            /* Summary */
+            .cart-summary {
+                flex: 1;
+                background: #e0e0e0;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                overflow-y: auto;
+            }
+
+            .cart-summary h3 {font-size: 24px;color: #333;margin-bottom: 20px;}
+
+            .summary-details {flex-grow: 1;}
+
+            .summary-item {display: flex;justify-content: space-between;margin-bottom: 10px;font-size: 14px;color: #333;}
+
+            .discount-info {border-top: 1px solid #ccc;padding-top: 10px;margin-top: 15px;}
+
+            .discount-info p {font-size: 14px;color: #666;}
+
+            .checkout-btn {
+                width: 100%;
+                padding: 12px;
+                background: #000;
+                color: white;
+                border: none;
+                border-radius: 20px;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                margin-top: 20px;
+            }
+
+            .checkout-btn:hover {background: #333;}
+
+            @media (max-width: 768px) {
+                .cart-card {flex-direction: column;width: 90%;margin-top: 7rem;height: calc(100vh - 8rem);padding: 0;}
+                .cart-left, .cart-summary {padding: 20px;}
+                .cart-item {gap: 15px;}
+                .cart-item img {width: 60px;height: 60px;}
+                .item-price {width: 80px;}
+                .quantity-btn, .remove-btn {width: 25px;height: 25px;}
+                .cart-footer {flex-direction: column;gap: 10px;}
+                .clear-cart-btn {width: 100%;padding: 10px;}
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="nav">
+                <a href="#" class="logo-content">
+                    <i class='bx bx-wrench logo-icon'></i>
+                    <span class="logo-text">XYZ Repairs</span>
+                </a>
+                <ul class="menu-list">
+                    <li><a href="products.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html" class="nav-link">Login</a></li>
+                    <li><a href="register.html" class="nav-link">Register</a></li>
+                    <li><a href="checkout.html" class="nav-link">Checkout</a></li>
+                    <li><a href="invoice.html" class="nav-link">Invoice</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                </ul>
+                <a href="cart.html" class="cart-btn" id="cart-btn">Cart (0)</a>
+            </nav>
+        </header>
+
+        <div class="cart-card">
+            <div class="cart-left">
+                <div class="cart-items-header">
+                    <h2>Shopping Cart</h2>
+                </div>
+                <div class="cart-items-list" id="cart-items"></div>
+                <div class="cart-footer">
+                    <div class="continue-shopping">
+                        <a href="products.html">Continue Shopping</a>
+                    </div>
+                    <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+                </div>
+            </div>
+            <div class="cart-summary">
+                <h3>Summary</h3>
+                <div class="summary-details" id="summary-details"></div>
+                <div class="discount-info" id="discount-info">
+                    <p>Discount (10%): -<span id="discount-amount">0.00</span></p>
+                </div>
+                <button class="checkout-btn" onclick="window.location.href='checkout.html'">Checkout</button>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+            function updateCartButton() {
+                const cart = getCart();
+                const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.getElementById('cart-btn').textContent = `Cart (${itemCount})`;
+            }
+
+            function updateCartDisplay() {
+                const cart = getCart();
+                const itemsList = document.getElementById('cart-items');
+                const summaryDetails = document.getElementById('summary-details');
+                const discountAmount = document.getElementById('discount-amount');
+
+                if (cart.length === 0) {
+                    itemsList.innerHTML = '<p>Your cart is empty</p>';
+                    summaryDetails.innerHTML = '<p>No items in cart</p>';
+                    discountAmount.textContent = '0.00';
+                    return;
+                }
+
+                itemsList.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <p>${item.name}</p>
+                            <p class="description">${item.description || 'No description available'}</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateCartQuantity('${item.id}', -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateCartQuantity('${item.id}', 1)">+</button>
+                        </div>
+                        <div class="item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <button class="remove-btn" onclick="removeFromCart('${item.id}')">X</button>
+                    </div>
+                `).join('');
+
+                summaryDetails.innerHTML = cart.map(item => `
+                    <div class="summary-item">
+                        <span>${item.name} (x${item.quantity})</span>
+                        <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                `).join('');
+
+                const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const discountRate = 0.10;
+                const discount = subtotal * discountRate;
+                const total = subtotal - discount;
+
+                discountAmount.textContent = discount.toFixed(2);
+
+                summaryDetails.innerHTML += `
+                    <div class="summary-item" style="font-weight: 600; margin-top: 10px;">
+                        <span>Subtotal</span>
+                        <span>$${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div class="summary-item" style="font-weight: 600;">
+                        <span>Total</span>
+                        <span>$${total.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+
+            window.addEventListener('load', () => {
+                updateCartDisplay();
+                updateCartButton();
+            });
+            window.addEventListener('cartUpdated', () => {
+                updateCartDisplay();
+                updateCartButton();
+            });
+        </script>
+    </body>
+</html>

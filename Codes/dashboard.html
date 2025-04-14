@@ -1,0 +1,325 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard - XYZ Repairs</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+            * {margin: 0;padding: 0;box-sizing: border-box;}
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: #f5f5f5;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: hidden;
+            }
+
+            :root {--primary-color: #626cd6;--primary-color-hover: #555bb3;--z-fixed: 100;}
+
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 7rem;
+                background: #000;
+                z-index: var(--z-fixed);
+            }
+
+            .nav {
+                max-width: 1200px;
+                margin: 0 auto;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 40px;
+            }
+
+            .logo-content {display: flex;align-items: center;text-decoration: none;color: white;font-size: 30px;font-weight: 700;}
+
+            .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+            .logo-text {font-size: 30px;}
+
+            .menu-list {display: flex;list-style: none;gap: 25px;}
+
+            .nav-link {color: white;text-decoration: none;font-size: 18px;font-weight: 600;transition: color 0.3s;}
+
+            .nav-link:hover, .nav-link.active-navlink {color: var(--primary-color);}
+
+            .cart-btn {background: var(--primary-color);color: white;font-size: 16px;font-weight: 600;padding: 10px 20px;border: none;border-radius: 20px;text-decoration: none;}
+
+            .cart-btn:hover {background: var(--primary-color-hover);}
+
+            .dashboard-container {
+                width: 1000px;
+                max-width: 90%;
+                margin-top: 8rem;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                padding: 30px;
+                height: calc(100vh - 9rem);
+                overflow-y: auto;
+            }
+
+            .dashboard-container h2 {font-size: 28px;color: #333;margin-bottom: 20px;}
+
+            .section {margin-bottom: 30px;}
+
+            .section h3 {font-size: 20px;color: #333;margin-bottom: 15px;}
+
+            .bar-chart {margin-bottom: 20px;}
+
+            .bar-chart h4 {font-size: 16px;color: #555;margin-bottom: 10px;}
+
+            .bar-item {display: flex;align-items: center;margin-bottom: 10px;}
+
+            .bar-label {width: 80px;font-size: 14px;color: #333;}
+
+            .bar {height: 20px;display: inline-block;vertical-align: middle;}
+
+            .bar-count {margin-left: 10px;font-size: 14px;color: #666;}
+
+            .search-group {margin-bottom: 15px;display: flex;gap: 10px;}
+
+            .search-group input {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 14px;
+                flex-grow: 1;
+            }
+
+            .search-group button {
+                padding: 10px 20px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 20px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .search-group button:hover {background: var(--primary-color-hover);}
+
+            .invoices-list {max-height: 200px;overflow-y: auto;border: 1px solid #ccc;padding: 10px;border-radius: 8px;}
+
+            .invoice-item {margin-bottom: 10px;font-size: 14px;color: #333;}
+
+            .user-invoices {border: 1px solid #ccc;padding: 10px;border-radius: 8px;}
+
+            @media (max-width: 768px) {
+                .dashboard-container {width: 90%;padding: 20px;margin-top: 7rem;height: calc(100vh - 8rem);}
+                .search-group {flex-direction: column;}
+                .bar-label {width: 60px;font-size: 12px;}
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="nav">
+                <a href="#" class="logo-content">
+                    <i class='bx bx-wrench logo-icon'></i>
+                    <span class="logo-text">XYZ Repairs</span>
+                </a>
+                <ul class="menu-list">
+                    <li><a href="products.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html" class="nav-link">Login</a></li>
+                    <li><a href="register.html" class="nav-link">Register</a></li>
+                    <li><a href="checkout.html" class="nav-link">Checkout</a></li>
+                    <li><a href="invoice.html" class="nav-link">Invoice</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                </ul>
+                <a href="cart.html" class="cart-btn" id="cart-btn">Cart (0)</a>
+            </nav>
+        </header>
+
+        <div class="dashboard-container">
+            <h2>Dashboard</h2>
+            <div class="section">
+                <h3>User Frequency</h3>
+                <div id="gender-chart" class="bar-chart"></div>
+                <div id="age-chart" class="bar-chart"></div>
+            </div>
+            <div class="section">
+                <h3>All Invoices</h3>
+                <div class="search-group">
+                    <input type="text" id="invoice-search" placeholder="Search by TRN (e.g., 000-000-000)">
+                    <button onclick="searchInvoices()">Search</button>
+                </div>
+                <div class="invoices-list" id="invoices-list"></div>
+            </div>
+            <div class="section">
+                <h3>Your Invoices</h3>
+                <div class="user-invoices" id="user-invoices"></div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+        <script>
+            function updateCartButton() {
+                // get the cart items
+                const cart = getCart();
+                // count total items in cart
+                const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+                // update cart button text with item count
+                document.getElementById('cart-btn').textContent = `Cart (${itemCount})`;
+            }
+
+            function showUserFrequency() {
+                // get all users and remove null entries
+                const registerData = getUsers().filter(user => user !== null);
+                const genderChart = document.getElementById('gender-chart');
+                const ageChart = document.getElementById('age-chart');
+
+                // check if no user data exists
+                if (registerData.length === 0) {
+                    genderChart.innerHTML = '<p>No user data available.</p>';
+                    ageChart.innerHTML = '';
+                    return;
+                }
+
+                const genderStats = { Male: 0, Female: 0, Other: 0 };
+                const ageStats = { '18-25': 0, '26-35': 0, '36-50': 0, '50+': 0 };
+                // loop through users to count gender and age groups
+                registerData.forEach(user => {
+                    genderStats[user.gender] = (genderStats[user.gender] || 0) + 1;
+                    const dob = new Date(user.dob);
+                    const age = Math.floor((new Date() - dob) / (1000 * 60 * 60 * 24 * 365.25));
+                    if (age >= 18 && age <= 25) ageStats['18-25']++;
+                    else if (age <= 35) ageStats['26-35']++;
+                    else if (age <= 50) ageStats['36-50']++;
+                    else if (age > 50) ageStats['50+']++;
+                });
+
+                /// Uses Math.max to find the highest count among gender and age group stats, ensuring a minimum of 1, for scaling chart widths up to 300 pixels.
+                // Math.max returns the largest number from a set of values, comparing genderStats/ageStats counts and 1 to determine the maximum.
+                const maxGender = Math.max(genderStats.Male, genderStats.Female, genderStats.Other, 1);
+                const maxAge = Math.max(ageStats['18-25'], ageStats['26-35'], ageStats['36-50'], ageStats['50+'], 1);
+                const maxWidth = 300;
+
+                // build gender chart with bars
+                genderChart.innerHTML = '<h4>Gender Distribution</h4>' + Object.keys(genderStats).map(gender => {
+                    const count = genderStats[gender];
+                    const width = Math.floor((count / maxGender) * maxWidth);
+                    return `
+                        <div class="bar-item">
+                            <span class="bar-label">${gender}</span>
+                            <img src="../Assets/thinbar.jpg" class="bar" width="${width}px" height="20px" alt="Bar">
+                            <span class="bar-count">${count}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                // build age chart with bars
+                ageChart.innerHTML = '<h4>Age Distribution</h4>' + Object.keys(ageStats).map(ageGroup => {
+                    const count = ageStats[ageGroup];
+                    const width = Math.floor((count / maxAge) * maxWidth);
+                    return `
+                        <div class="bar-item">
+                            <span class="bar-label">${ageGroup}</span>
+                            <img src="../Assets/thinbar.jpg" class="bar" width="${width}px" height="20px" alt="Bar">
+                            <span class="bar-count">${count}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            function showInvoices(searchTRN = '') {
+                // get all invoices
+                const allInvoices = getAllInvoices();
+                const invoicesList = document.getElementById('invoices-list');
+
+                // show message if no invoices
+                if (allInvoices.length === 0) {
+                    invoicesList.innerHTML = '<p>No invoices available.</p>';
+                    return;
+                }
+
+                // filter invoices by trn if search is used
+                const filteredInvoices = searchTRN 
+                    ? allInvoices.filter(invoice => invoice.trn === searchTRN) 
+                    : allInvoices;
+
+                // display filtered invoices
+                invoicesList.innerHTML = filteredInvoices.map(invoice => `
+                    <div class="invoice-item">
+                        Invoice #${invoice.invoiceNumber} - TRN: ${invoice.trn} - Date: ${new Date(invoice.date).toLocaleDateString()} - Total: $${invoice.total}
+                    </div>
+                `).join('');
+            }
+
+            function searchInvoices() {
+                // get search input and show matching invoices
+                const searchTRN = document.getElementById('invoice-search').value.trim();
+                showInvoices(searchTRN);
+            }
+
+            function getUserInvoices() {
+                const currentUser = getCurrentUser();
+                const trn = currentUser.trn || '';
+                const allInvoices = getAllInvoices();
+                const userInvoices = document.getElementById('user-invoices');
+
+                console.log('Current user TRN:', trn); // Debug
+                console.log('All invoices:', allInvoices); // Debug
+                console.log('Filtered invoices for TRN:', allInvoices.filter(invoice => invoice.trn === trn)); // Debug
+
+                // check if user is logged in
+                if (!trn) {
+                    userInvoices.innerHTML = '<p>Please log in to view your invoices.</p>';
+                    return;
+                }
+
+                // get invoices for current user
+                const userInvoicesList = allInvoices.filter(invoice => invoice.trn === trn);
+                // show message if no invoices for user
+                if (userInvoicesList.length === 0) {
+                    userInvoices.innerHTML = '<p>No invoices found for your TRN.</p>';
+                    return;
+                }
+
+                // display user's invoices
+                userInvoices.innerHTML = userInvoicesList.map(invoice => `
+                    <div class="invoice-item">
+                        Invoice #${invoice.invoiceNumber} - Date: ${new Date(invoice.date).toLocaleDateString()} - Total: $${invoice.total}
+                    </div>
+                `).join('');
+            }
+
+            window.addEventListener('load', () => {
+                console.log('Window loaded, checking functions...');
+                console.log('showInvoices defined:', typeof showInvoices);
+                const currentUser = getCurrentUser();
+                // restrict access to admins only
+                if (!currentUser.isAdmin) {
+                    alert('Access restricted to admins only.');
+                    window.location.href = 'index.html';
+                    return;
+                }
+                // run all dashboard functions on load
+                updateCartButton();
+                showUserFrequency();
+                showInvoices();
+                getUserInvoices();
+            });
+        </script>
+    </body>
+</html>

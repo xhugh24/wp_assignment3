@@ -1,0 +1,217 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+      /* Reset default margins and padding */
+      * {margin: 0;padding: 0;box-sizing: border-box;}
+
+      body {
+          font-family: 'Poppins', sans-serif;
+          background: #7462ce;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          padding: min(5vh, 40px);
+          overflow-x: hidden;
+      }
+
+      /* Variables */
+      :root {--primary-color: #626cd6;--primary-color-hover: #555bb3;}
+
+      .logo-content {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: white;
+          font-size: 30px;
+          font-weight: 700;
+          margin-bottom: 30px;
+      }
+
+      .logo-icon {font-size: 2.5rem;margin-right: 10px;}
+
+      .logo-text {font-size: 30px;}
+
+      .login-container {
+          background: #ffffff;
+          padding: 40px 30px;
+          border-radius: 15px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+          max-width: 400px;
+          width: 90%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+
+      .login-container h1 {text-align: center;color: #333;margin-bottom: 30px;font-size: 28px;font-weight: 600;}
+
+      .login-container form {width: 100%;}
+
+      .form-group {margin-bottom: 20px;display: flex;flex-direction: column;align-items: stretch;}
+
+      .login-container label {font-size: 14px;margin-bottom: 8px;color: #555;}
+
+      .login-container input {
+          padding: 12px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          width: 100%;
+          outline: none;
+      }
+
+      .login-container input:focus {border-color: rgba(0, 0, 0, 0.5);box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);}
+
+      .button-group {display: flex;gap: 10px;}
+
+      .login-container button {
+          width: 100%;
+          padding: 12px;
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+          border-radius: 8px;
+          font-size: 18px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      .login-container button:hover {background-color: var(--primary-color-hover);}
+
+      .login-container .cancel-btn {background-color: #ccc;color: #333;}
+
+      .login-container .cancel-btn:hover {background-color: #b3b3b3;}
+
+      .signup-text {margin-top: 15px;font-size: 14px;text-align: center;}
+
+      .signup-text a {color: var(--primary-color);font-weight: 600;text-decoration: none;}
+
+      .signup-text a:hover {text-decoration: underline;}
+
+      @media (max-width: 768px) {
+          .logo-content {font-size: 24px;}
+          .logo-icon {font-size: 2rem;}
+          .logo-text {font-size: 24px;}
+          .login-container {padding: 20px 15px;}
+          .login-container h1 {font-size: 24px;}
+          .login-container label {font-size: 12px;}
+          .login-container input {padding: 10px;font-size: 14px;}
+          .login-container button {padding: 10px;font-size: 16px;}
+          .button-group {flex-direction: column;gap: 5px;}
+          .signup-text {font-size: 12px;}
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#" class="logo-content flex">
+      <i class='bx bx-wrench logo-icon'></i>
+      <span class="logo-text">XYZ Repairs</span>
+    </a>
+
+    <div class="login-container">
+      <h1>Welcome Back</h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="trn">TRN</label>
+          <!--ADMIN TRN: 000-000-001-->
+          <input type="text" id="trn" name="trn" placeholder="000-000-000" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <!--ADMIN PASSWORD: admin1234-->
+          <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="button-group">
+          <button type="submit">Login</button>
+          <button type="button" class="cancel-btn" onclick="document.getElementById('login-form').reset()">Cancel</button>
+        </div>
+      </form>
+      <div class="signup-text">
+        Don’t have an account? <a href="register.html">Sign up</a><br>
+        <a href="#" id="reset-password">Reset Password</a>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // initialize data only if needed (no reset)
+        //log debug info to the console
+        if (initializeData()) {
+          console.log("Data initialized successfully.");
+        } else {
+          console.log("Data already initialized or failed to initialize.");
+        }
+        console.log("Current users in localStorage:", getUsers());
+
+        // set login attempts limit
+        let loginAttempts = 3;
+        // handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          const trn = document.getElementById('trn').value;
+          const password = document.getElementById('password').value;
+          console.log("Attempting login with TRN:", trn, "Password:", password);
+          const user = loginUser(trn, password);
+          if (user) {
+            console.log("Login successful, currentUser set to:", getCurrentUser());
+            // redirect based on user role
+            if (user.isAdmin) {
+              window.location.href = 'dashboard.html';
+            } else {
+              window.location.href = 'products.html';
+            }
+          } else {
+            loginAttempts--;
+            console.log("Login failed. Attempts remaining:", loginAttempts);
+            // handle failed login attempts
+            if (loginAttempts > 0) {
+              alert(`Invalid TRN or password. ${loginAttempts} attempts remaining.`);
+            } else {
+              alert('Account locked. Redirecting to error page.');
+              window.location.href = 'error.html';
+            }
+          }
+        });
+
+        // handle password reset
+        document.getElementById('reset-password').addEventListener('click', function(e) {
+          e.preventDefault();
+          const trn = prompt('Enter your TRN to reset password:');
+          if (!trn) return;
+          const users = getUsers();
+          const userIndex = users.findIndex(u => u.trn === trn);
+          if (userIndex === -1) {
+            alert('TRN not found.');
+            return;
+          }
+          const newPassword = prompt('Enter new password (min 8 characters):');
+          // check and save new password
+          if (newPassword && newPassword.length >= 8) {
+            users[userIndex].password = newPassword;
+            saveUsers(users);
+            alert('Password reset successful!');
+          } else {
+            alert('Password must be at least 8 characters.');
+          }
+        });
+    </script>
+  </body>
+</html>

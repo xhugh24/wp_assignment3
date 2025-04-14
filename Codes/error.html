@@ -1,0 +1,90 @@
+<!--# Title: Web Programming Group Assignment E-Commerse Website-->
+<!--# Authors: Bryan Jones (1907425), Sewayne Pearson (1406678), Roberto Forbes (1900631), Roydel Pottinger (2004406)-->
+<!--# Tested on: Chrome for Windows, Mozilla Firefox for Linux, Github Pages-->
+<!--# -->
+<!--#Description: Group Assignment E-Commerse Website containing HTML, CSS and Javascript code along with relevant Website Assets-->
+<!--#-->
+<!--#Note:-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Error - XYZ Repairs</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+            * {margin: 0; padding: 0; box-sizing: border-box;}
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: #7462ce;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            :root {
+                --primary-color: #626cd6;
+                --primary-color-hover: #555bb3;
+                --text-color: #333;
+            }
+
+            .error-container {
+                text-align: center;
+                padding: 40px;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                max-width: 500px;
+                width: 90%;
+            }
+
+            .error-container i {
+                font-size: 4rem;
+                color: #ff4444;
+                margin-bottom: 20px;
+            }
+
+            .error-container h1 {
+                font-size: 36px;
+                font-weight: 700;
+                color: var(--text-color);
+                margin-bottom: 10px;
+            }
+
+            .error-container p {
+                font-size: 18px;
+                color: #666;
+                margin-bottom: 20px;
+            }
+
+            .error-container a {
+                display: inline-block;
+                padding: 10px 20px;
+                background: var(--primary-color);
+                color: #fff;
+                text-decoration: none;
+                font-weight: 600;
+                border-radius: 20px;
+                transition: background-color 0.3s;
+            }
+
+            .error-container a:hover {
+                background: var(--primary-color-hover);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="error-container">
+            <i class='bx bx-lock'></i>
+            <h1>Login Failed</h1>
+            <p>Incorrect TRN or password. Please try again or register if you don’t have an account.</p>
+            <a href="index.html">Back to Login</a>
+        </div>
+    </body>
+</html>
